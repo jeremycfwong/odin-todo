@@ -1,0 +1,42 @@
+body{
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+}
+
+#header{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background-color: rgb(170, 148, 115);
+    font-size: 2rem;
+    padding:1rem;
+}
+
+#sidebar{
+    background-color: rgb(250, 239, 224);
+    display: flex;
+    flex-direction: column;
+    grid-auto-rows: 1fr;
+}
+
+    #sidebar div {
+        padding: 1rem;
+    }
+
+    #sidebar .line {
+        margin-top: 0.5rem;
+        width: 80%;
+        padding: 0;
+        border: 1px black solid;
+    }
+
+    #sidebar .section-heading{
+        padding-bottom: .5rem;
+        font-weight: bold;
+    }
+
+#content{
+
+}
