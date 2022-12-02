@@ -7,6 +7,7 @@ export default class Project {
     addItem(todo) {
         if(this.tasks.find((item) => item.getTitle() === todo.getTitle())) return
         this.tasks.push(todo)
+        return this
     }
 
     getName(){

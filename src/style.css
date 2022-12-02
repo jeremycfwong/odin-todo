@@ -37,6 +37,15 @@ body{
         font-weight: bold;
     }
 
+    .sidebar-item {
+        cursor: pointer;
+    }
+
+    .selected {
+        font-weight: bold;
+        cursor: pointer;
+    }
+
 #content{
 
 }

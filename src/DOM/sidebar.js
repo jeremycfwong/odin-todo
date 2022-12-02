@@ -3,25 +3,20 @@ function renderSideBar(){
 
     var homeHeading = createHeading('Home')
 
-    var taskOverview = document.createElement('div')
-    taskOverview.setAttribute('id', 'taskOverview')
-    taskOverview.textContent = 'Task Overview'
+    var taskOverview = createDiv('generalTasks', 'General Tasks')
+    taskOverview.addEventListener('click', (_) => {
+        taskOverview.setAttribute('class', 'selected')
+    })
 
-    var todayTask = document.createElement('div')
-    todayTask.setAttribute('id', 'todayTask')
-    todayTask.textContent = 'Task Today'
+    var todayTask = createDiv('todayTask', 'Task Today')
 
-    var weekTask = document.createElement('div')
-    weekTask.setAttribute('id', 'weekTask')
-    weekTask.textContent = 'This Week'
+    var weekTask = createDiv('weekTask', 'This Week')
 
     var projectHeading = createHeading('Projects')
-    
+
     var projectDemo = document.createElement('div')
     projectDemo.textContent = 'Project Demo'
 
-
-    
     sidebar.replaceChildren(homeHeading, taskOverview, todayTask, weekTask, projectHeading, projectDemo)
 }
 
@@ -36,6 +31,15 @@ function createHeading(textContent){
     heading.appendChild(line)
     return heading
 }
+
+function createDiv(id, textContent){
+    var div = document.createElement('div')
+    div.setAttribute('id', id)
+    div.setAttribute('class', 'sidebar-item')
+    div.textContent = textContent
+    return div
+}
+
 
 
 export {renderSideBar}
