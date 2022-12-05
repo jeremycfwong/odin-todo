@@ -15,6 +15,4 @@ export default class TodoLists{
     updateList(project, todoItem){
         this.todoLists.find((item) => item.getName() === project.getName()).addItem(todoItem)
     }
-
-    
 }

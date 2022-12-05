@@ -1,3 +1,5 @@
+import { renderContent } from "./content"
+
 function renderSideBar(){
     var sidebar = document.getElementById('sidebar')
 
@@ -6,11 +8,20 @@ function renderSideBar(){
     var taskOverview = createDiv('generalTasks', 'General Tasks')
     taskOverview.addEventListener('click', (_) => {
         taskOverview.setAttribute('class', 'selected')
+        renderContent('General')
     })
 
     var todayTask = createDiv('todayTask', 'Task Today')
+    todayTask.addEventListener('click', (_) => {
+        todayTask.setAttribute('class', 'selected')
+        renderContent('Task Today')
+    })
 
     var weekTask = createDiv('weekTask', 'This Week')
+    weekTask.addEventListener('click', (_) => {
+        weekTask.setAttribute('class', 'selected')
+        renderContent('This Week')
+    })
 
     var projectHeading = createHeading('Projects')
 
