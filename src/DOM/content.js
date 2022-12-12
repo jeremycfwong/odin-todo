@@ -9,8 +9,10 @@ function renderContent(project){
 
     content.replaceChildren(heading)
 
-    for (var item in test.getList(project).getTodoItems()){
-        content.appendChild(renderTodo(test.getList(project).getTodoItems()[item]))
+    var contentList = test.getList(project).getTodoItems()
+
+    for (var item in contentList){
+        content.appendChild(renderTodo(contentList[item]))
     }
 }
 
