@@ -1,4 +1,5 @@
 import {test} from '../index'
+import { renderDetail } from './detailView'
 
 function renderContent(project){
     var content = document.getElementById('content')
@@ -7,7 +8,11 @@ function renderContent(project){
     heading.setAttribute('id','contentHeading')
     heading.textContent = project
 
-    content.replaceChildren(heading)
+    var addButton = createAddButton()
+
+    content.replaceChildren(heading,addButton)
+
+
 
     var contentList = test.getList(project).getTodoItems()
 
@@ -36,6 +41,19 @@ function renderTodo(item){
 
     todoItem.replaceChildren(todoTitle,dueDate,priority,completed)
     return todoItem
+}
+
+function createAddButton(){
+    var add = document.createElement('div')
+    add.setAttribute('id', 'addButton')
+    add.textContent = "+"
+
+
+    add.addEventListener('click', (_) => {
+        renderDetail()
+    })
+
+    return add
 }
 
 export {renderContent}
