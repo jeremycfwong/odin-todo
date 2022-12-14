@@ -24,5 +24,11 @@ export default class Project {
 
     deleteTodoItem(name){
         this.tasks = this.tasks.filter((item) => item.getTitle() !== name)
-    }    
+    }
+    
+    updateItem(todo, origin) {
+        var record = this.tasks.find((item) => item.getTitle() == origin)
+
+        record.setTitle(todo.getTitle())
+    }
 }

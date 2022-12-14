@@ -8,20 +8,18 @@ function renderContent(project){
     heading.setAttribute('id','contentHeading')
     heading.textContent = project
 
-    var addButton = createAddButton()
+    var addButton = createAddButton(project)
 
     content.replaceChildren(heading,addButton)
-
-
 
     var contentList = test.getList(project).getTodoItems()
 
     for (var item in contentList){
-        content.appendChild(renderTodo(contentList[item]))
+        content.appendChild(renderTodo(contentList[item], project))
     }
 }
 
-function renderTodo(item){
+function renderTodo(item, project){
     var todoItem = document.createElement('div')
 
     var todoTitle = document.createElement('div')
@@ -40,17 +38,21 @@ function renderTodo(item){
     }
 
     todoItem.replaceChildren(todoTitle,dueDate,priority,completed)
+    
+    todoItem.addEventListener('click', (_) => {
+        renderDetail(project, item)
+    })
     return todoItem
 }
 
-function createAddButton(){
+function createAddButton(project){
     var add = document.createElement('div')
     add.setAttribute('id', 'addButton')
     add.textContent = "+"
 
 
     add.addEventListener('click', (_) => {
-        renderDetail()
+        renderDetail(project)
     })
 
     return add
