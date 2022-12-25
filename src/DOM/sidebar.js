@@ -1,34 +1,62 @@
 import { renderContent } from "./content"
+import { addProject } from "../Services/addProject"
+import { test } from ".."
+
 
 function renderSideBar(){
     var sidebar = document.getElementById('sidebar')
 
     var homeHeading = createHeading('Home')
 
+    var general = document.createElement('div')
     var taskOverview = createDiv('generalTasks', 'General Tasks')
+    taskOverview.setAttribute('class', 'sidebar-item-general')
     taskOverview.addEventListener('click', (_) => {
-        taskOverview.setAttribute('class', 'selected')
+        toggleSelected(taskOverview)
         renderContent('General')
     })
 
     var todayTask = createDiv('todayTask', 'Task Today')
+    todayTask.setAttribute('class', 'sidebar-item-general')
     todayTask.addEventListener('click', (_) => {
-        todayTask.setAttribute('class', 'selected')
+        toggleSelected(todayTask)
         renderContent('Task Today')
     })
 
     var weekTask = createDiv('weekTask', 'This Week')
+    weekTask.setAttribute('class', 'sidebar-item-general')
     weekTask.addEventListener('click', (_) => {
-        weekTask.setAttribute('class', 'selected')
+        toggleSelected(weekTask)
         renderContent('This Week')
     })
 
+    general.replaceChildren(taskOverview, todayTask, weekTask)
+
     var projectHeading = createHeading('Projects')
 
-    var projectDemo = document.createElement('div')
-    projectDemo.textContent = 'Project Demo'
+    //by item create
+    var projectList = test.getAllList()
+    var projectItems = document.createElement('div')
 
-    sidebar.replaceChildren(homeHeading, taskOverview, todayTask, weekTask, projectHeading, projectDemo)
+    for (var project in projectList){
+        var title = projectList[project].getName()
+
+        if (!['General','Task Today', 'This Week'].includes(title)){
+            projectItems.appendChild(createProjectItem(title))
+        }
+    }
+
+    var addProjectButton = document.createElement('div')
+    addProjectButton.setAttribute('id', 'sidebarAdd')
+    addProjectButton.textContent = '+'
+    addProjectButton.addEventListener('click', (_) => {
+        toggleNewProject()
+    })
+
+    var newProject = newProjectInput()
+
+    sidebar.replaceChildren(homeHeading, general, projectHeading, projectItems, 
+        addProjectButton, newProject)
 }
 
 function createHeading(textContent){
@@ -52,5 +80,65 @@ function createDiv(id, textContent){
 }
 
 
+function newProjectInput() {
+    var inputSection = document.createElement('div')
+    inputSection.setAttribute('id', 'sidebar-input-section')
+    var input = document.createElement('input')
+    input.setAttribute('id', 'projectName')
+
+    var buttonContainer = document.createElement('div')
+    buttonContainer.setAttribute('id', 'button-container')
+
+    var confirmButton = document.createElement('div')
+    confirmButton.setAttribute('id', 'button-add-confirm')
+    confirmButton.textContent = 'Add'
+    confirmButton.addEventListener('click', (_) => {
+        addProject(input.value)
+        renderSideBar()
+    })
+
+    var cancelButton = document.createElement('div')
+    cancelButton.setAttribute('id', 'button-cancel')
+    cancelButton.textContent = 'Cancel'
+    cancelButton.addEventListener('click', (_) => {
+        input.value = ''
+        toggleNewProject()
+    })
+
+
+
+    buttonContainer.replaceChildren(confirmButton, cancelButton)
+    inputSection.replaceChildren(input, buttonContainer)
+
+    return inputSection
+}
+
+function toggleNewProject() {
+    var inputSection = document.getElementById('sidebar-input-section')
+    inputSection.classList.toggle("hidden")
+}
+
+function createProjectItem(title) {
+    var projectElement = document.createElement('div')
+    projectElement.textContent = title
+    projectElement.setAttribute('class', 'sidebar-item-project')
+
+    projectElement.addEventListener('click', (_) => {
+        toggleSelected(projectElement)
+        renderContent(title)
+    })
+
+    return projectElement
+}
+
+function toggleSelected(selected){
+    var generalItems = document.querySelectorAll('.sidebar-item-general')
+    var projectItems = document.querySelectorAll('.sidebar-item-project')
+    
+    generalItems.forEach((item) => item.classList.remove('active'))
+    projectItems.forEach((item) => item.classList.remove('active'))
+
+    selected.classList.add('active')
+}
 
 export {renderSideBar}

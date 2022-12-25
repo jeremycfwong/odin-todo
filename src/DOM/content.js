@@ -12,7 +12,13 @@ function renderContent(project){
 
     content.replaceChildren(heading,addButton)
 
-    var contentList = test.getList(project).getTodoItems()
+    if (project == 'Task Today'){
+        var contentList = test.getList('General').getToday()
+    } else if (project == 'This Week'){
+        var contentList = test.getList('General').getWeek()
+    } else {
+        var contentList = test.getList(project).getTodoItems()
+    }
 
     for (var item in contentList){
         content.appendChild(renderTodo(contentList[item], project))

@@ -1,7 +1,8 @@
 import { renderContent } from "./content"
 import { submitItem } from "../Services/submitTodo"
+import format from "date-fns/format"
 
-function renderDetail(project, item = null){
+async function renderDetail(project, item = null){
     var content = document.getElementById('content')
 
     var heading = document.createElement('h1')
@@ -28,18 +29,22 @@ function renderDetail(project, item = null){
     if (item){
         title.setAttribute('value', item.getTitle())
         description.value = item.getDescription()
-        // priority
-
+        if (item.dueDate != ''){
+            dueDate.value = format(item.getRawDate(), 'yyyy-MM-dd')
+        }
+        
+        setDefaultPriority(item.getPriority(), priority)
+        
         submit.textContent = "Update Todo"
         submit.addEventListener('click', (_) => {
             submitItem(project, "update", item.getTitle())
-            renderContent('General')
+            renderContent(project)
         } )
     } else {
         submit.textContent = "Add New Todo"
         submit.addEventListener('click', (_) => {
             submitItem(project, "create")
-            renderContent('General')
+            renderContent(project)
         } )
     }
 
@@ -52,12 +57,15 @@ function createPriorityList(){
     priority.setAttribute('id', 'priorityList')
 
     var p1 = document.createElement('option')
+    p1.setAttribute('id', 'priority-low')
     p1.value = "Low"
     p1.textContent = "Low"
     var p2 = document.createElement('option')
+    p2.setAttribute('id', 'priority-medium')
     p2.value = "Medium"
     p2.textContent = "Medium"
     var p3 = document.createElement('option')
+    p3.setAttribute('id', 'priority-high')
     p3.value = "High"
     p3.textContent = "High"
 
@@ -66,6 +74,20 @@ function createPriorityList(){
     return priority
 }
 
+function setDefaultPriority(value, priority){
+    switch(value){
+        case('Low'):
+            priority[0].setAttribute('selected', 'selected')
+            break
+        case('Medium'):
+            priority[1].setAttribute('selected', 'selected')
+            break
+        case ('High'):
+            priority[2].setAttribute('selected', 'selected')
+            break
+        default:
+    }
+}
 
 
 

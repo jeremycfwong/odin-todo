@@ -6,11 +6,10 @@ import './style.css'
 import TodoLists from "./Objects/TodoLists";
 import {renderContent} from "./DOM/content"
 
-renderHeader()
-renderSideBar()
 
-var item = new TodoItem('hi','yoyoyo','today', 'urgent', true)
-var item2 = new TodoItem('hit','yoyoyo','today', 'urgent', true)
+
+var item = new TodoItem('hi','yoyoyo','', 'Low', true)
+var item2 = new TodoItem('hit','yoyoyo','', 'Medium', true)
 
 var project = new Project('hi Project')
 
@@ -21,6 +20,8 @@ var test = new TodoLists()
 test.updateList(test.getList('General'),item)
 test.updateList(test.getList('General'),item2)
 
+renderHeader()
+renderSideBar()
 renderContent('General')
 
 export {test}

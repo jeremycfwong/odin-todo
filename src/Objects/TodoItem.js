@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export default class TodoItem {
     constructor(title, description, dueDate, priority, completed) {
         this.title = title;
@@ -24,7 +26,16 @@ export default class TodoItem {
     }
 
     getDueDate(){
-        return this.dueDate;
+        if (this.dueDate != ''){
+            var output = format(this.dueDate, 'dd/MM/yyyy')
+            return output
+        }
+
+        return this.dueDate
+    }
+
+    getRawDate(){
+        return this.dueDate
     }
 
     setDueDate(dueDate){
