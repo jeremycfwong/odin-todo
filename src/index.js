@@ -15,13 +15,13 @@ var project = new Project('hi Project')
 
 project.addItem(item)
 
-var test = new TodoLists()
+var masterTodo = new TodoLists()
 
-test.updateList(test.getList('General'),item)
-test.updateList(test.getList('General'),item2)
+masterTodo.updateList(masterTodo.getList('General'),item)
+masterTodo.updateList(masterTodo.getList('General'),item2)
 
 renderHeader()
 renderSideBar()
 renderContent('General')
 
-export {test}
+export {masterTodo}

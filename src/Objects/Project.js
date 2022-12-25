@@ -48,4 +48,5 @@ export default class Project {
     getWeek(){
         return this.tasks.filter((item) => isSameWeek(item.getRawDate(), new Date()))
     }
+
 }

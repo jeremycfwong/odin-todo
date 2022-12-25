@@ -1,13 +1,13 @@
-import { test } from ".."
+import { masterTodo } from ".."
 import Project from "../Objects/Project"
 
 function addProject(name) {
     if (name == ''){
         alert ('Project should not be empty!')
-    } else if (test.findList(name)){
+    } else if (masterTodo.findList(name)){
         alert ('Project Already exist... Please use another name!')
     } else {
-        test.addList(new Project(name))
+        masterTodo.addList(new Project(name))
     }
 }
 

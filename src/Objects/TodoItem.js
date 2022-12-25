@@ -27,7 +27,7 @@ export default class TodoItem {
 
     getDueDate(){
         if (this.dueDate != ''){
-            var output = format(this.dueDate, 'dd/MM/yyyy')
+            var output = format(parseISO(this.dueDate), 'dd/MM/yyyy')
             return output
         }
 

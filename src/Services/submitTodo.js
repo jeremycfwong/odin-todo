@@ -1,5 +1,5 @@
 import TodoItem from "../Objects/TodoItem"
-import { test } from ".."
+import { masterTodo } from ".."
 import {format} from 'date-fns'
 
 function submitItem (project, action, origin = null) {
@@ -17,9 +17,9 @@ function submitItem (project, action, origin = null) {
     
 
     if (action == "create"){
-        test.getList(project).addItem(item)
+        masterTodo.getList(project).addItem(item)
     } else {
-        test.getList(project).updateItem(item, origin)
+        masterTodo.getList(project).updateItem(item, origin)
     }
 
 }

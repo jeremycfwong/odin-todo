@@ -1,4 +1,4 @@
-import {test} from '../index'
+import {masterTodo} from '../index'
 import { renderDetail } from './detailView'
 
 function renderContent(project){
@@ -13,11 +13,13 @@ function renderContent(project){
     content.replaceChildren(heading,addButton)
 
     if (project == 'Task Today'){
-        var contentList = test.getList('General').getToday()
+        var contentList = masterTodo.getList('General').getToday()
+        project = 'General'
     } else if (project == 'This Week'){
-        var contentList = test.getList('General').getWeek()
+        var contentList = masterTodo.getList('General').getWeek()
+        project = 'General'
     } else {
-        var contentList = test.getList(project).getTodoItems()
+        var contentList = masterTodo.getList(project).getTodoItems()
     }
 
     for (var item in contentList){
@@ -42,11 +44,22 @@ function renderTodo(item, project){
     if (item.getCompleted()){
         completed.checked
     }
-
-    todoItem.replaceChildren(todoTitle,dueDate,priority,completed)
     
-    todoItem.addEventListener('click', (_) => {
-        renderDetail(project, item)
+    var deleteButton = document.createElement('button')
+    deleteButton.setAttribute('id', 'delete-button')
+    deleteButton.textContent = 'Delete'
+    deleteButton.addEventListener('click', (_) => {
+        masterTodo.getList(project).deleteTodoItem(item.getTitle())
+        renderContent('General')
+    })
+
+
+    todoItem.replaceChildren(todoTitle,dueDate,priority, deleteButton,completed)
+    
+    todoItem.addEventListener('click', (e) => {
+        if (e.target.tagName != "BUTTON" && e.target.tagName != "INPUT"){
+            renderDetail(project, item)
+        }
     })
     return todoItem
 }

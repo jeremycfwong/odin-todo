@@ -4,8 +4,6 @@ export default class TodoLists{
     constructor(){
         this.todoLists = []
         this.todoLists.push(new Project('General'))
-        this.todoLists.push(new Project('Task Today'))
-        this.todoLists.push(new Project('This Week'))
         this.todoLists.push(new Project('Demo'))
         this.todoLists.push(new Project('Demo2'))
     }
@@ -28,5 +26,9 @@ export default class TodoLists{
 
     getAllList(){
         return this.todoLists
+    }
+
+    removeProject(name){
+        this.todoLists = this.todoLists.filter((item) => item.getName() != name)
     }
 }

@@ -1,6 +1,6 @@
 import { renderContent } from "./content"
 import { addProject } from "../Services/addProject"
-import { test } from ".."
+import { masterTodo } from ".."
 
 
 function renderSideBar(){
@@ -35,7 +35,7 @@ function renderSideBar(){
     var projectHeading = createHeading('Projects')
 
     //by item create
-    var projectList = test.getAllList()
+    var projectList = masterTodo.getAllList()
     var projectItems = document.createElement('div')
 
     for (var project in projectList){
@@ -123,10 +123,22 @@ function createProjectItem(title) {
     projectElement.textContent = title
     projectElement.setAttribute('class', 'sidebar-item-project')
 
-    projectElement.addEventListener('click', (_) => {
-        toggleSelected(projectElement)
-        renderContent(title)
+    projectElement.addEventListener('click', (e) => {
+        if(e.target.id != 'project-remove'){
+            toggleSelected(projectElement)
+            renderContent(title)
+        }
     })
+
+    var removeButton = document.createElement('div')
+    removeButton.setAttribute('id', 'project-remove')
+    removeButton.textContent = 'X'
+    removeButton.addEventListener('click', (_) => {
+        masterTodo.removeProject(title)
+        renderSideBar()
+    })
+
+    projectElement.appendChild(removeButton)
 
     return projectElement
 }
