@@ -13,6 +13,14 @@ export default class Project {
         return this
     }
 
+    setName(name) {
+        this.name = name
+    }
+
+    setTasks(tasks){
+        this.tasks = tasks
+    }
+
     getName(){
         return this.name
     }

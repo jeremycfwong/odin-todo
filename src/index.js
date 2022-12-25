@@ -5,20 +5,27 @@ import { renderSideBar } from "./DOM/sidebar";
 import './style.css'
 import TodoLists from "./Objects/TodoLists";
 import {renderContent} from "./DOM/content"
+import { loadData } from "./Services/Storage";
 
+if(!localStorage.getItem('masterTodo')){
+    var masterTodo = new TodoLists()
+} else {
+    var masterTodo = Object.assign(new TodoLists(), loadData())
 
+    masterTodo.setLists(
+        masterTodo
+        .getAllList()
+        .map((project) => Object.assign(new Project(), project))
+    )
 
-var item = new TodoItem('hi','yoyoyo','', 'Low', true)
-var item2 = new TodoItem('hit','yoyoyo','', 'Medium', true)
+    masterTodo
+    .getAllList()
+    .forEach((project) => 
+        project.setTasks(
+        project.getTodoItems().map((task) => Object.assign(new TodoItem(), task))
+    ));
 
-var project = new Project('hi Project')
-
-project.addItem(item)
-
-var masterTodo = new TodoLists()
-
-masterTodo.updateList(masterTodo.getList('General'),item)
-masterTodo.updateList(masterTodo.getList('General'),item2)
+}
 
 renderHeader()
 renderSideBar()

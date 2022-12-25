@@ -8,6 +8,10 @@ export default class TodoLists{
         this.todoLists.push(new Project('Demo2'))
     }
 
+    setLists(projects) {
+        this.todoLists = projects
+    }
+
     getList(listName){
         return this.todoLists.find((item) => item.getName() === listName)
     }

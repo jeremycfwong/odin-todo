@@ -1,7 +1,7 @@
 import { renderContent } from "./content"
 import { addProject } from "../Services/addProject"
 import { masterTodo } from ".."
-
+import { saveData } from "../Services/Storage"
 
 function renderSideBar(){
     var sidebar = document.getElementById('sidebar')
@@ -135,6 +135,7 @@ function createProjectItem(title) {
     removeButton.textContent = 'X'
     removeButton.addEventListener('click', (_) => {
         masterTodo.removeProject(title)
+        saveData()
         renderSideBar()
     })
 

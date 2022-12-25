@@ -1,4 +1,5 @@
 import {masterTodo} from '../index'
+import { saveData } from '../Services/Storage'
 import { renderDetail } from './detailView'
 
 function renderContent(project){
@@ -50,6 +51,7 @@ function renderTodo(item, project){
     deleteButton.textContent = 'Delete'
     deleteButton.addEventListener('click', (_) => {
         masterTodo.getList(project).deleteTodoItem(item.getTitle())
+        saveData()
         renderContent('General')
     })
 

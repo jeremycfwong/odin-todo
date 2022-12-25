@@ -1,14 +1,12 @@
 import TodoItem from "../Objects/TodoItem"
 import { masterTodo } from ".."
-import {format} from 'date-fns'
+import { saveData } from "./Storage"
+
 
 function submitItem (project, action, origin = null) {
     var title = document.getElementById('detailTitle').value
     var description = document.getElementById('detailDescription').value
     var dueDate = document.getElementById('detailDate').value
-    if (dueDate != ''){
-        dueDate = new Date(document.getElementById('detailDate').value)
-    }
     
     var priority = document.getElementById('priorityList')
     var priorityValue = priority.options[ priority.selectedIndex ].value 
@@ -21,6 +19,8 @@ function submitItem (project, action, origin = null) {
     } else {
         masterTodo.getList(project).updateItem(item, origin)
     }
+
+    saveData()
 
 }
 
