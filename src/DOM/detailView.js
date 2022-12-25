@@ -15,8 +15,7 @@ async function renderDetail(project, item = null){
 
     var description = document.createElement('textarea')
     description.setAttribute('id', 'detailDescription')
-    description.value = "Testing Item many good"
-
+    
     var dueDate = document.createElement('input')
     dueDate.setAttribute('id', 'detailDate')
     dueDate.setAttribute('type', 'date')
@@ -24,8 +23,7 @@ async function renderDetail(project, item = null){
     var priority = createPriorityList()
 
     var submit = document.createElement('div')
-    submit.setAttribute
-
+    
     if (item){
         title.setAttribute('value', item.getTitle())
         description.value = item.getDescription()

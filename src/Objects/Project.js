@@ -1,5 +1,4 @@
-import { isSameWeek } from "date-fns"
-import isSameDay from "date-fns/isSameDay"
+import { isSameDay,isSameWeek } from "date-fns"
 
 export default class Project {
     constructor(name){
@@ -11,10 +10,6 @@ export default class Project {
         if(this.tasks.find((item) => item.getTitle() === todo.getTitle())) return alert('please use a diff task name')
         this.tasks.push(todo)
         return this
-    }
-
-    setName(name) {
-        this.name = name
     }
 
     setTasks(tasks){

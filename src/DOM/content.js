@@ -1,5 +1,4 @@
 import {masterTodo} from '../index'
-import { saveData } from '../Services/Storage'
 import { renderDetail } from './detailView'
 
 function renderContent(project){
@@ -14,13 +13,13 @@ function renderContent(project){
     content.replaceChildren(heading,addButton)
 
     if (project == 'Task Today'){
-        var contentList = masterTodo.getList('General').getToday()
+        var contentList = masterTodo.getProject('General').getToday()
         project = 'General'
     } else if (project == 'This Week'){
-        var contentList = masterTodo.getList('General').getWeek()
+        var contentList = masterTodo.getProject('General').getWeek()
         project = 'General'
     } else {
-        var contentList = masterTodo.getList(project).getTodoItems()
+        var contentList = masterTodo.getProject(project).getTodoItems()
     }
 
     for (var item in contentList){
@@ -50,7 +49,7 @@ function renderTodo(item, project){
     deleteButton.setAttribute('id', 'delete-button')
     deleteButton.textContent = 'Delete'
     deleteButton.addEventListener('click', (_) => {
-        masterTodo.getList(project).deleteTodoItem(item.getTitle())
+        masterTodo.getProject(project).deleteTodoItem(item.getTitle())
         saveData()
         renderContent('General')
     })

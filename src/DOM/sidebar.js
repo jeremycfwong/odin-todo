@@ -9,35 +9,16 @@ function renderSideBar(){
     var homeHeading = createHeading('Home')
 
     var general = document.createElement('div')
-    var taskOverview = createDiv('generalTasks', 'General Tasks')
-    taskOverview.setAttribute('class', 'sidebar-item-general')
-    taskOverview.addEventListener('click', (_) => {
-        toggleSelected(taskOverview)
-        renderContent('General')
-    })
 
+    var taskOverview = createDiv('generalTasks', 'General')
     var todayTask = createDiv('todayTask', 'Task Today')
-    todayTask.setAttribute('class', 'sidebar-item-general')
-    todayTask.addEventListener('click', (_) => {
-        toggleSelected(todayTask)
-        renderContent('Task Today')
-    })
-
     var weekTask = createDiv('weekTask', 'This Week')
-    weekTask.setAttribute('class', 'sidebar-item-general')
-    weekTask.addEventListener('click', (_) => {
-        toggleSelected(weekTask)
-        renderContent('This Week')
-    })
-
     general.replaceChildren(taskOverview, todayTask, weekTask)
 
     var projectHeading = createHeading('Projects')
 
-    //by item create
-    var projectList = masterTodo.getAllList()
+    var projectList = masterTodo.getAllProject()
     var projectItems = document.createElement('div')
-
     for (var project in projectList){
         var title = projectList[project].getName()
 
@@ -49,9 +30,7 @@ function renderSideBar(){
     var addProjectButton = document.createElement('div')
     addProjectButton.setAttribute('id', 'sidebarAdd')
     addProjectButton.textContent = '+'
-    addProjectButton.addEventListener('click', (_) => {
-        toggleNewProject()
-    })
+    addProjectButton.addEventListener('click', toggleNewProject)
 
     var newProject = newProjectInput()
 
@@ -76,6 +55,13 @@ function createDiv(id, textContent){
     div.setAttribute('id', id)
     div.setAttribute('class', 'sidebar-item')
     div.textContent = textContent
+
+    div.setAttribute('class', 'sidebar-item-general')
+    div.addEventListener('click', (_) => {
+        toggleSelected(div)
+        renderContent(textContent)
+    })
+
     return div
 }
 
@@ -104,8 +90,6 @@ function newProjectInput() {
         input.value = ''
         toggleNewProject()
     })
-
-
 
     buttonContainer.replaceChildren(confirmButton, cancelButton)
     inputSection.replaceChildren(input, buttonContainer)

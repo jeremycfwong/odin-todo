@@ -13,13 +13,11 @@ function submitItem (project, action, origin = null) {
 
     var item = new TodoItem(title,description,dueDate, priorityValue, false)
     
-
     if (action == "create"){
-        masterTodo.getList(project).addItem(item)
+        masterTodo.getProject(project).addItem(item)
     } else {
-        masterTodo.getList(project).updateItem(item, origin)
+        masterTodo.getProject(project).updateItem(item, origin)
     }
-
     saveData()
 
 }

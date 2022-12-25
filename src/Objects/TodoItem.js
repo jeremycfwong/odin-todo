@@ -1,4 +1,4 @@
-import { format, toISOString } from "date-fns";
+import { format } from "date-fns";
 
 export default class TodoItem {
     constructor(title, description, dueDate, priority, completed) {

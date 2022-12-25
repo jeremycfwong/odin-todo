@@ -1,5 +1,6 @@
 const { default: Project } = require("./Project")
 
+
 export default class TodoLists{
     constructor(){
         this.todoLists = []
@@ -8,19 +9,15 @@ export default class TodoLists{
         this.todoLists.push(new Project('Demo2'))
     }
 
-    setLists(projects) {
+    setProjects(projects) {
         this.todoLists = projects
     }
 
-    getList(listName){
+    getProject(listName){
         return this.todoLists.find((item) => item.getName() === listName)
     }
 
-    updateList(project, todoItem){
-        this.todoLists.find((item) => item.getName() === project.getName()).addItem(todoItem)
-    }
-
-    findList(name){
+    findProject(name){
         return Boolean(this.todoLists.find((item) => item.getName() == name))
     }
 
@@ -28,7 +25,7 @@ export default class TodoLists{
         this.todoLists.push(project)
     }
 
-    getAllList(){
+    getAllProject(){
         return this.todoLists
     }
 
