@@ -97,13 +97,13 @@ function newProjectInput() {
     inputSection.setAttribute('id', 'sidebar-input-section')
     inputSection.setAttribute('class', 'hidden')
     var input = document.createElement('input')
-    input.setAttribute('id', 'projectName')
+    input.setAttribute('id', 'sidebar-input')
 
     var buttonContainer = document.createElement('div')
-    buttonContainer.setAttribute('id', 'button-container')
+    buttonContainer.setAttribute('id', 'sidebar-btn-container')
 
     var confirmButton = document.createElement('div')
-    confirmButton.setAttribute('id', 'button-add-confirm')
+    confirmButton.setAttribute('id', 'sidebar-add-confirm')
     confirmButton.textContent = 'Add'
     confirmButton.addEventListener('click', (_) => {
         addProject(input.value)
@@ -111,7 +111,7 @@ function newProjectInput() {
     })
 
     var cancelButton = document.createElement('div')
-    cancelButton.setAttribute('id', 'button-cancel')
+    cancelButton.setAttribute('id', 'sidebar-add-cancel')
     cancelButton.textContent = 'Cancel'
     cancelButton.addEventListener('click', (_) => {
         input.value = ''
@@ -149,6 +149,7 @@ function createProjectItem(title) {
         }
     })
 
+
     var removeButton = document.createElement('div')
     removeButton.setAttribute('id', 'project-remove')
     removeButton.setAttribute('class', 'hidden')
@@ -158,6 +159,15 @@ function createProjectItem(title) {
         saveData()
         renderSideBar()
     })
+
+    project.addEventListener('mouseover', (_) => {
+        removeButton.setAttribute('class', '')
+    })
+
+    project.addEventListener('mouseout', (_) => {
+        removeButton.setAttribute('class', 'hidden')
+    })
+
 
     project.replaceChildren(icon, projectElement,removeButton)
 

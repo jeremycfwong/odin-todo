@@ -37,8 +37,10 @@ export default class Project {
 
         record.setTitle(todo.getTitle())
         record.setDescription(todo.getDescription())
-        if(todo.getRawDate() != ''){
+        if(todo.getDueDate() != ''){
             record.setDueDate(todo.getRawDate())
+        } else {
+            record.setDueDate(todo.getDueDate())
         }
         
         record.setPriority(todo.getPriority())

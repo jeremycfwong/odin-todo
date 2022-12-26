@@ -2,6 +2,7 @@
     --primary: rgb(170, 148, 115);
     --secondary: rgb(250, 239, 224);
     --secondary-selected: rgb(233, 195, 123);
+    --secondary-input: rgb(218, 196, 155);
     font-family: Verdana, Geneva, Tahoma, sans-serif
 }
 
@@ -44,6 +45,7 @@ body{
 
     #sidebar .section-heading{
         padding-bottom: .5rem;
+        padding-top: 1.5rem;
         font-weight: bold;
     }
 
@@ -59,12 +61,54 @@ body{
         width: 1.5rem;
         height: 1.5rem;
     }
+
+    .sidebar-item:hover{
+        font-weight: bold;
+    }
+
+    #sidebar-btn-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        text-align: center;
+    }
+
+    #sidebar-input{
+        border-radius: 1rem;
+        outline: none;
+        padding: 0.5rem;
+        padding-left: 1rem;
+        font-size: 1rem;
+        background-color: var(--secondary-input);
+        width: 95%;
+    }
     
-
-
 #content{
-    padding-left:1rem;
+    padding-top: 2rem;
+    margin-left: 15%;
+    margin-right: 15%;
 }
+    #content-add-button{
+        font-weight: bold;
+        background-color: var(--secondary-selected);
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .content-todo {
+        display: grid;
+        padding: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        grid-template-columns: 2fr 1fr 1fr 0.5fr 1fr;
+        align-items: center;
+    }
+
+    .content-todo.heading{
+        font-weight: bold;
+    }
+
+    .content-todo-delete, .content-todo-completed{
+        text-align: center;
+    }
 
 .hidden {
     display: none;
@@ -73,4 +117,13 @@ body{
 .active {
     background-color: var(--secondary-selected);
     border-radius: 1rem;
+}
+
+.detail-btn{
+    background-color: var(--secondary-selected);
+    border-radius: 1rem;
+    width: 10rem;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 1rem;
 }

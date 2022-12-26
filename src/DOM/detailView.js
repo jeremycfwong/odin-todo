@@ -9,29 +9,43 @@ async function renderDetail(project, item = null){
     heading.setAttribute('id','contentHeading')
     heading.textContent = 'Detail View'
 
-    var title = document.createElement('input')
-    title.setAttribute('id', 'detailTitle')
-    title.setAttribute('value', 'Testing Item')
+    var title = document.createElement('div')
+    var titleSection = document.createElement('div')
+    titleSection.textContent = 'Title'
+    var titleContent = document.createElement('input')
+    titleContent.setAttribute('id', 'detailTitle')
+    titleContent.setAttribute('value', 'Testing Item')
 
-    var description = document.createElement('textarea')
-    description.setAttribute('id', 'detailDescription')
+    var description = document.createElement('div')
+    var descriptionSection = document.createElement('div')
+    descriptionSection.textContent = 'Description'
+    var descriptionContent = document.createElement('textarea')
+    descriptionContent.setAttribute('id', 'detailDescription')
     
-    var dueDate = document.createElement('input')
-    dueDate.setAttribute('id', 'detailDate')
-    dueDate.setAttribute('type', 'date')
 
-    var priority = createPriorityList()
+    var dueDate = document.createElement('div')
+    var dueDateSection = document.createElement('div')
+    dueDateSection.textContent = 'Due Date'
+    var dueDateContent = document.createElement('input')
+    dueDateContent.setAttribute('id', 'detailDate')
+    dueDateContent.setAttribute('type', 'date')
+
+    var priority = document.createElement('div')
+    var prioritySection = document.createElement('div')
+    prioritySection.textContent = 'Priority'
+    var priorityContent = createPriorityList()
 
     var submit = document.createElement('div')
+    submit.setAttribute('class', 'detail-btn')
     
     if (item){
-        title.setAttribute('value', item.getTitle())
-        description.value = item.getDescription()
+        titleContent.setAttribute('value', item.getTitle())
+        descriptionContent.value = item.getDescription()
         if (item.dueDate != ''){
             dueDate.value = format(item.getRawDate(), 'yyyy-MM-dd')
         }
         
-        setDefaultPriority(item.getPriority(), priority)
+        setDefaultPriority(item.getPriority(), priorityContent)
         
         submit.textContent = "Update Todo"
         submit.addEventListener('click', (_) => {
@@ -45,6 +59,11 @@ async function renderDetail(project, item = null){
             renderContent(project)
         } )
     }
+
+    title.replaceChildren(titleSection,titleContent)
+    description.replaceChildren(descriptionSection,descriptionContent)
+    dueDate.replaceChildren(dueDateSection, dueDateContent)
+    priority.replaceChildren(prioritySection,priorityContent)
 
     content.replaceChildren(heading, title,description, dueDate, priority, submit)
 }
