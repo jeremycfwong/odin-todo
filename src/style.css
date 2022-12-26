@@ -1,3 +1,10 @@
+:root{
+    --primary: rgb(170, 148, 115);
+    --secondary: rgb(250, 239, 224);
+    --secondary-selected: rgb(233, 195, 123);
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
 body{
     margin: 0;
     display: grid;
@@ -9,13 +16,14 @@ body{
 #header{
     grid-column-start: 1;
     grid-column-end: 3;
-    background-color: rgb(170, 148, 115);
+    background-color: var(--primary);
     font-size: 2rem;
     padding:1rem;
+    font-weight: 550;
 }
 
 #sidebar{
-    background-color: rgb(250, 239, 224);
+    background-color: var(--secondary);
     display: flex;
     flex-direction: column;
     grid-auto-rows: 1fr;
@@ -23,6 +31,8 @@ body{
 
     #sidebar div {
         padding: 1rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
     }
 
     #sidebar .line {
@@ -39,17 +49,28 @@ body{
 
     .sidebar-item {
         cursor: pointer;
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        padding: 0;
+        align-items: center;
     }
 
-    .selected {
-        font-weight: bold;
-        cursor: pointer;
+    .sidebar-icon {
+        width: 1.5rem;
+        height: 1.5rem;
     }
+    
+
 
 #content{
-
+    padding-left:1rem;
 }
 
 .hidden {
     display: none;
+}
+
+.active {
+    background-color: var(--secondary-selected);
+    border-radius: 1rem;
 }

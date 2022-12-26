@@ -1,4 +1,5 @@
 import { renderContent } from "./content"
+import { toggleSelected } from "./sidebar"
 
 function renderHeader(){
     var header = document.getElementById('header')
@@ -7,6 +8,8 @@ function renderHeader(){
     pageName.textContent = "My Todo List"
 
     pageName.addEventListener('click', (_) => {
+        var general = document.getElementById('general-task')
+        toggleSelected(general)
         renderContent('General')
     })
 
